@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import dj_database_url
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -84,17 +89,12 @@ WSGI_APPLICATION = 'Meta.wsgi.application'
 
 DATABASES = {
     # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': 'metadatabase',
+    #     'USER': 'meta',
+    #     'PASSWORD': 'ballu'
     # }
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'metadatabase',
-        'USER': 'meta',
-        'PASSWORD': 'ballu',
-        # 'HOST': 'localhost',
-        # 'PORT': '5437',
-    }
+    'default': dj_database_url.parse(env('POS_DATABASE_URL'))
 }
 
 
