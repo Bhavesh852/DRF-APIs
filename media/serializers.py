@@ -37,5 +37,5 @@ class commentSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = comment
-        fields = ['id', 'comment']
+        fields = "__all__"
     
